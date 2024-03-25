@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{E7E887D6-78EE-40B3-804E-B032BB3F11C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{60042F65-2625-4303-AF82-FD0CC5EECA4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B693F090-1547-4E93-9E69-29F4BFF47648}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.build.targets = Directory.build.targets
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EA5BB24A-F708-4D37-B8CF-E995A2165B7F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.markdownlint.json = .markdownlint.json
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C6E55307-1D2D-4B9B-BB98-2B8190BE52D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{59D577E6-9070-4EBF-B5F7-E5868967070F}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Contributing-Setup.md = docs\Contributing-Setup.md
+		docs\Usage-Guide.md = docs\Usage-Guide.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kentico.Xperience.Disqus", "src\Kentico.Xperience.Disqus\Kentico.Xperience.Disqus.csproj", "{B89A0101-8935-4157-B08A-E4DE50224B6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingGoat", "examples\DancingGoat\DancingGoat.csproj", "{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kentico.Xperience.Disqus.Tests", "tests\Kentico.Xperience.TagManager.Tests\Kentico.Xperience.Disqus.Tests.csproj", "{E2EAB34E-A6D6-426C-95CC-C8970D944795}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B89A0101-8935-4157-B08A-E4DE50224B6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B89A0101-8935-4157-B08A-E4DE50224B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B89A0101-8935-4157-B08A-E4DE50224B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B89A0101-8935-4157-B08A-E4DE50224B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B89A0101-8935-4157-B08A-E4DE50224B6B} = {60042F65-2625-4303-AF82-FD0CC5EECA4B}
+		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F} = {E7E887D6-78EE-40B3-804E-B032BB3F11C7}
+		{E2EAB34E-A6D6-426C-95CC-C8970D944795} = {C6E55307-1D2D-4B9B-BB98-2B8190BE52D5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B2A20BC-F57B-4AAE-B1C2-E4DC52EFCAC5}
+	EndGlobalSection
+EndGlobal
