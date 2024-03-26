@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kentico.Xperience.Disqus", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingGoat", "examples\DancingGoat\DancingGoat.csproj", "{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kentico.Xperience.Disqus.Tests", "tests\Kentico.Xperience.TagManager.Tests\Kentico.Xperience.Disqus.Tests.csproj", "{E2EAB34E-A6D6-426C-95CC-C8970D944795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kentico.Xperience.Disqus.Tests", "tests\Kentico.Xperience.Disqus.Tests\Kentico.Xperience.Disqus.Tests.csproj", "{5F2170BD-308D-43E2-9F00-49B4DD071053}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2EAB34E-A6D6-426C-95CC-C8970D944795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2170BD-308D-43E2-9F00-49B4DD071053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2170BD-308D-43E2-9F00-49B4DD071053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2170BD-308D-43E2-9F00-49B4DD071053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2170BD-308D-43E2-9F00-49B4DD071053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,7 +64,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B89A0101-8935-4157-B08A-E4DE50224B6B} = {60042F65-2625-4303-AF82-FD0CC5EECA4B}
 		{20A2C1AD-54B9-4876-8AB1-286BF9BF789F} = {E7E887D6-78EE-40B3-804E-B032BB3F11C7}
-		{E2EAB34E-A6D6-426C-95CC-C8970D944795} = {C6E55307-1D2D-4B9B-BB98-2B8190BE52D5}
+		{5F2170BD-308D-43E2-9F00-49B4DD071053} = {C6E55307-1D2D-4B9B-BB98-2B8190BE52D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B2A20BC-F57B-4AAE-B1C2-E4DC52EFCAC5}
