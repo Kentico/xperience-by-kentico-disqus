@@ -18,6 +18,10 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="$(AssemblyName).Tests" />
+	</ItemGroup>
+
   <ItemGroup>
     <Content Update="Components\_DisqusComponentWidget.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

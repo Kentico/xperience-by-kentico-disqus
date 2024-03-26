@@ -26,7 +26,6 @@
     <PackageReference Include="kentico.xperience.azurestorage" />
     <PackageReference Include="kentico.xperience.imageprocessing" />
     <PackageReference Include="kentico.xperience.webapp" />
-	<PackageReference Include="sonaranalyzer.csharp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Kentico.Xperience.Disqus\Kentico.Xperience.Disqus.csproj" />
