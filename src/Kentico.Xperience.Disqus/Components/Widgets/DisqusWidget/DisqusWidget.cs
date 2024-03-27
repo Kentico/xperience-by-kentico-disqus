@@ -86,7 +86,7 @@ public class DisqusWidget : ViewComponent
             return Content(string.Empty);
         }
 
-        return View("~/Components/Widgets/_DisqusComponentWidget.cshtml", new DisqusWidgetViewModel()
+        return View("~/Components/Widgets/DisqusWidget/_DisqusWidget.cshtml", new DisqusWidgetViewModel()
         {
             Identifier = identifier,
             Site = options.SiteShortName,
