@@ -18,20 +18,20 @@ public class DisqusComponentWidgetProperties : IWidgetProperties
     /// <summary>
     /// An unique string identifying the current page. If empty, it will be generated based on the page's WebPageItemID.
     /// </summary>
-    [TextInputComponent(Label = "Disqus Page Identifier", ExplanationText = "An unique string identifying the current page. If empty, it will be generated based on the page's WebPageItemID.")]
+    [TextInputComponent(Label = "Disqus page identifier", ExplanationText = "An unique string identifying the current page. If empty, it will be generated based on the page's WebPageItemID.")]
     public string? PageIdentifier { get; set; }
 
 
     /// <summary>
     /// A custom title for the created Disqus thread.
     /// </summary>
-    [TextInputComponent(Label = "Disqus Title", ExplanationText = "A custom title for the created Disqus thread.")]
+    [TextInputComponent(Label = "Disqus title", ExplanationText = "A custom title for the created Disqus thread.")]
     public string? Title { get; set; }
 
 
     /// <summary>
     /// Option to use disqus comment counts.
     /// </summary>
-    [CheckBoxComponent(Label = "Display Disqus Comment Count", ExplanationText = "Choose whether you want to add Disqus comment counts. You will need to add '#disqus_thread' to your article URLs. See Disqus documentation for this.")]
+    [CheckBoxComponent(Label = "Display disqus comment count", ExplanationText = "Choose whether you want to add Disqus comment counts. You will need to add '#disqus_thread' to your article URLs. See Disqus documentation for this.")]
     public bool DisplayCommentCount { get; set; }
 }
