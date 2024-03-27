@@ -1,12 +1,12 @@
 ﻿using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Xperience.Admin.Base.FormAnnotations;
 
-namespace Kentico.Xperience.Disqus.Components;
+namespace Kentico.Xperience.Disqus.Widgets;
 
 /// <summary>
 /// The configurable properties for the Disqus widget.
 /// </summary>
-public class DisqusComponentWidgetProperties : IWidgetProperties
+public class DisqusWidgetProperties : IWidgetProperties
 {
     /// <summary>
     /// The CSS class(es) added to the Disqus widget's containing DIV.

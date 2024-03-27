@@ -5,26 +5,26 @@ using CMS.DataEngine;
 using CMS.Helpers;
 
 using Kentico.PageBuilder.Web.Mvc;
-using Kentico.Xperience.Disqus.Components;
+using Kentico.Xperience.Disqus.Widgets;
 
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 [assembly: CMS.AssemblyDiscoverable]
-[assembly: RegisterWidget(DisqusComponentWidget.IDENTIFIER,
-    typeof(DisqusComponentWidget),
+[assembly: RegisterWidget(DisqusWidget.IDENTIFIER,
+    typeof(DisqusWidget),
     "Disqus comments",
-    typeof(DisqusComponentWidgetProperties),
+    typeof(DisqusWidgetProperties),
     Description = "Enables commenting, ratings, and reactions on Xperience pages.",
     IconClass = "icon-bubbles")]
 
-namespace Kentico.Xperience.Disqus.Components;
+namespace Kentico.Xperience.Disqus.Widgets;
 
 /// <summary>
-/// Class which constructs the <see cref="DisqusComponentWidgetViewModel"/> and renders the widget.
+/// Class which constructs the <see cref="DisqusWidgetViewModel"/> and renders the widget.
 /// </summary>
-public class DisqusComponentWidget : ViewComponent
+public class DisqusWidget : ViewComponent
 {
     /// <summary>
     /// The internal identifier of the Disqus widget.
@@ -35,9 +35,9 @@ public class DisqusComponentWidget : ViewComponent
     private readonly IEventLogService eventLogService;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DisqusComponentWidget"/> class.
+    /// Initializes a new instance of the <see cref="DisqusWidget"/> class.
     /// </summary>
-    public DisqusComponentWidget(
+    public DisqusWidget(
         IConfiguration configuration,
         IEventLogService eventLogService
     )
@@ -48,10 +48,10 @@ public class DisqusComponentWidget : ViewComponent
 
 
     /// <summary>
-    /// Populates the <see cref="DisqusComponentWidgetViewModel"/> and returns the appropriate view.
+    /// Populates the <see cref="DisqusWidgetViewModel"/> and returns the appropriate view.
     /// </summary>
     /// <param name="widgetProperties">User populated properties from the page builder or view.</param>
-    public IViewComponentResult Invoke(ComponentViewModel<DisqusComponentWidgetProperties> widgetProperties)
+    public IViewComponentResult Invoke(ComponentViewModel<DisqusWidgetProperties> widgetProperties)
     {
         if (widgetProperties == null)
         {
@@ -67,7 +67,7 @@ public class DisqusComponentWidget : ViewComponent
         {
             if (string.IsNullOrEmpty(widgetProperties.Properties.PageIdentifier))
             {
-                LogWidgetLoadError($"{nameof(DisqusComponentWidgetProperties.PageIdentifier)} is null or empty and {nameof(ComponentViewModel.Page)} is null. The {nameof(DisqusComponentWidgetViewModel.Identifier)} can not be set. Please set the identifier or use a {nameof(ComponentViewModel.Page)}.");
+                LogWidgetLoadError($"{nameof(DisqusWidgetProperties.PageIdentifier)} is null or empty and {nameof(ComponentViewModel.Page)} is null. The {nameof(DisqusWidgetViewModel.Identifier)} can not be set. Please set the identifier or use a {nameof(ComponentViewModel.Page)}.");
                 return Content(string.Empty);
             }
 
@@ -86,7 +86,7 @@ public class DisqusComponentWidget : ViewComponent
             return Content(string.Empty);
         }
 
-        return View("~/Components/_DisqusComponentWidget.cshtml", new DisqusComponentWidgetViewModel()
+        return View("~/Components/Widgets/_DisqusComponentWidget.cshtml", new DisqusWidgetViewModel()
         {
             Identifier = identifier,
             Site = options.SiteShortName,
@@ -99,7 +99,7 @@ public class DisqusComponentWidget : ViewComponent
 
     private void LogWidgetLoadError(string description) =>
         eventLogService.LogError(
-            nameof(DisqusComponentWidget),
+            nameof(DisqusWidget),
             nameof(Invoke),
             description,
             new LoggingPolicy(TimeSpan.FromMinutes(1))

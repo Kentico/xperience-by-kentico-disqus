@@ -1,9 +1,9 @@
-﻿namespace Kentico.Xperience.Disqus.Components;
+﻿namespace Kentico.Xperience.Disqus.Widgets;
 
 /// <summary>
 /// The properties to be set when rendering the widget on a view.
 /// </summary>
-public class DisqusComponentWidgetViewModel
+public class DisqusWidgetViewModel
 {
     /// <summary>
     /// CSS classes added to the containing DIV.
