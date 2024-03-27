@@ -43,6 +43,7 @@ public class DisqusComponentWidget : ViewComponent
         this.configuration = configuration;
     }
 
+
     /// <summary>
     /// Populates the <see cref="DisqusComponentWidgetViewModel"/> and returns the appropriate view.
     /// </summary>
@@ -87,8 +88,8 @@ public class DisqusComponentWidget : ViewComponent
             Identifier = identifier,
             Site = options.SiteShortName,
             Url = pageUrl,
-            Title = widgetProperties.Properties.Title ?? "",
-            CssClass = widgetProperties.Properties.CssClass ?? "",
+            Title = widgetProperties.Properties.Title ?? string.Empty,
+            CssClass = widgetProperties.Properties.CssClass ?? string.Empty,
             DisplayCommentCount = widgetProperties.Properties.DisplayCommentCount
         });
     }

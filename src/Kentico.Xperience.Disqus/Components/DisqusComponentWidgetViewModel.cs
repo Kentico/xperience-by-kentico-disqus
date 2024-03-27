@@ -12,7 +12,7 @@ public class DisqusComponentWidgetViewModel
     {
         get;
         set;
-    } = "";
+    } = string.Empty;
 
 
     /// <summary>
@@ -22,7 +22,7 @@ public class DisqusComponentWidgetViewModel
     {
         get;
         set;
-    } = "";
+    } = string.Empty;
 
 
     /// <summary>
@@ -32,7 +32,7 @@ public class DisqusComponentWidgetViewModel
     {
         get;
         set;
-    } = "";
+    } = string.Empty;
 
 
     /// <summary>
@@ -42,7 +42,7 @@ public class DisqusComponentWidgetViewModel
     {
         get;
         set;
-    } = "";
+    } = string.Empty;
 
 
     /// <summary>
@@ -52,7 +52,7 @@ public class DisqusComponentWidgetViewModel
     {
         get;
         set;
-    } = "";
+    } = string.Empty;
 
     public bool DisplayCommentCount { get; set; } = false;
 }
