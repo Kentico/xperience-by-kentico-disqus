@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Admin.Disqus.Properties.CssClass.ExplanationText" xml:space="preserve">
+  <data name="admin.disqus.properties.cssclass.explanationText" xml:space="preserve">
     <value>Enter any number of CSS classes to apply to the Disqus thread, e.g. 'comments blue'</value>
   </data>
-  <data name="Admin.Disqus.Properties.CssClass.Label" xml:space="preserve">
+  <data name="admin.disqus.properties.cssclass.label" xml:space="preserve">
     <value>Css classes</value>
   </data>
-  <data name="Admin.Disqus.Properties.DisplayCommentCount.ExplanationText" xml:space="preserve">
+  <data name="admin.disqus.properties.displayCommentCount.explanationText" xml:space="preserve">
     <value>Choose whether you want to add Disqus comment counts. You will need to add '#disqus_thread' to your article URLs. See Disqus documentation for this.</value>
   </data>
-  <data name="Admin.Disqus.Properties.DisplayCommentCount.Label" xml:space="preserve">
+  <data name="admin.disqus.properties.displayCommentCount.label" xml:space="preserve">
     <value>Display disqus comment count</value>
   </data>
-  <data name="Admin.Disqus.Properties.PageIdentifier.ExplanationText" xml:space="preserve">
+  <data name="admin.disqus.properties.pageIdentifier.explanationText" xml:space="preserve">
     <value>An unique string identifying the current page. If empty, it will be generated based on the page's WebPageItemID.</value>
   </data>
-  <data name="Admin.Disqus.Properties.PageIdentifier.Label" xml:space="preserve">
+  <data name="admin.disqus.properties.pageIdentifier.label" xml:space="preserve">
     <value>Disqus page identifier</value>
   </data>
-  <data name="Admin.Disqus.Properties.Title.ExplanationText" xml:space="preserve">
+  <data name="admin.disqus.properties.title.explanationText" xml:space="preserve">
     <value>A custom title for the created Disqus thread.</value>
   </data>
-  <data name="Admin.Disqus.Properties.Title.Label" xml:space="preserve">
+  <data name="admin.disqus.properties.title.label" xml:space="preserve">
     <value>Disqus title</value>
   </data>
 </root>

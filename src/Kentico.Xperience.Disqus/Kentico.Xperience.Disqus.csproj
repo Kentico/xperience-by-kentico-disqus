@@ -30,6 +30,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\DisqusResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>DisqusResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Update="Components\Widgets\DisqusWidget\_DisqusWidget.cshtml">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>

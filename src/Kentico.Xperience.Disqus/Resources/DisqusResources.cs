@@ -7,7 +7,7 @@ using Kentico.Xperience.Disqus.Resources;
 
 namespace Kentico.Xperience.Disqus.Resources
 {
-    internal class DisqusResources
+    internal partial class DisqusResources
     {
     }
 }
