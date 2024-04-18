@@ -40,6 +40,8 @@ Add the following string to your `appsettings.json`
  }
 ```
 
+Beware that the content of the widget in administration interface can not be manipulated with. You can modify the properties of this widget, however the content is not interactive because otherwise there would be script conflicts between Disqus iFrame and Kentico administration interface.
+
 The `SiteShortName` value should match the site short name value in your Disqus account.
 
 ## Contributing

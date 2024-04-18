@@ -14,6 +14,11 @@ public class DisqusWidgetViewModel
         set;
     } = string.Empty;
 
+    public bool InKenticoAdmin
+    {
+        get;
+        set;
+    }
 
     /// <summary>
     /// The unique identifier of the current page.

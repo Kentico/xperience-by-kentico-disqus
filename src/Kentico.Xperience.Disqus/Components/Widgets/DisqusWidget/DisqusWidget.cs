@@ -1,15 +1,17 @@
 ﻿using System;
 
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+
 using CMS.Core;
 using CMS.DataEngine;
 using CMS.Helpers;
 
+using Kentico.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Xperience.Disqus.Widgets;
-
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 [assembly: CMS.AssemblyDiscoverable]
 [assembly: RegisterWidget(DisqusWidget.IDENTIFIER,
@@ -33,17 +35,20 @@ public class DisqusWidget : ViewComponent
 
     private readonly IConfiguration configuration;
     private readonly IEventLogService eventLogService;
+    private readonly IHttpContextAccessor accessor;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DisqusWidget"/> class.
     /// </summary>
     public DisqusWidget(
         IConfiguration configuration,
-        IEventLogService eventLogService
+        IEventLogService eventLogService,
+        IHttpContextAccessor accessor
     )
     {
         this.eventLogService = eventLogService;
         this.configuration = configuration;
+        this.accessor = accessor;
     }
 
 
@@ -86,6 +91,8 @@ public class DisqusWidget : ViewComponent
             return Content(string.Empty);
         }
 
+        bool inKenticoAdmin = accessor.HttpContext.Kentico().PageBuilder().EditMode;
+
         return View("~/Components/Widgets/DisqusWidget/_DisqusWidget.cshtml", new DisqusWidgetViewModel()
         {
             Identifier = identifier,
@@ -93,7 +100,8 @@ public class DisqusWidget : ViewComponent
             Url = pageUrl,
             Title = widgetProperties.Properties.Title ?? string.Empty,
             CssClass = widgetProperties.Properties.CssClass ?? string.Empty,
-            DisplayCommentCount = widgetProperties.Properties.DisplayCommentCount
+            DisplayCommentCount = widgetProperties.Properties.DisplayCommentCount,
+            InKenticoAdmin = inKenticoAdmin
         });
     }
 
