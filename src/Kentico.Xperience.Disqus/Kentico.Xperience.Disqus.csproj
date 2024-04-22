@@ -1,10 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<AddRazorSupportForMvc>True</AddRazorSupportForMvc>
 	</PropertyGroup>
+
+	<PropertyGroup>
+		<Title>Xperience by Kentico Disqus Widget</Title>
+		<PackageId>Kentico.Xperience.Disqus.Widget</PackageId>
+		<Authors>Kentico Software</Authors>
+		<Company>Kentico Software</Company>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>kentico xperience mvc core disqus comments</PackageTags>
+		<Description>A page builder widget which enables Disqus comments on your Xperience by Kentico website.</Description>
+		<RepositoryUrl>https://github.com/Kentico/xperience-by-kentico-disqus</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" PackagePath="" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="C:\Users\asus\Desktop\Work\xperience-by-kentico-disqus\\README.md" />
