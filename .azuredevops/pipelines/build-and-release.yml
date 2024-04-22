@@ -49,7 +49,7 @@ stages:
             value: Release
 
           - name: ProjectPath
-            value: src/PROJECT_NAME/PROJECT_NAME.csproj
+            value: src/Kentico.Xperience.Disqus/Kentico.Xperience.Disqus.csproj
 
         steps:
           - task: DotNetCoreCLI@2
