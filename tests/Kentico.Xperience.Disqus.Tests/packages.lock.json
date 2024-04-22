@@ -902,7 +902,7 @@
           "System.IO.Hashing": "7.0.0"
         }
       },
-      "kentico.xperience.disqus": {
+      "Kentico.Xperience.Disqus.Widget": {
         "type": "Project",
         "dependencies": {
           "Kentico.Xperience.WebApp": "[28.4.1, )"

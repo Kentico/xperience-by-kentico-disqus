@@ -15,11 +15,11 @@ This integration makes it easy to add the Disqus component by using predefined w
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 28.4.1         | 1.0.0           |
+| >= 28.4.1         | 2.0.0           |
 
 ### Dependencies
 
-- [ASP.NET Core 8.0](https://dotnet.microsoft.com/en-us/download)
+- [ASP.NET Core 6.0](https://dotnet.microsoft.com/en-us/download)
 - [Xperience by Kentico](https://docs.xperience.io/xp/changelog)
 
 ## Package Installation
