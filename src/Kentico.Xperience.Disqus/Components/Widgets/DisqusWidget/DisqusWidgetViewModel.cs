@@ -14,6 +14,10 @@ public class DisqusWidgetViewModel
         set;
     } = string.Empty;
 
+    /// <summary>
+    /// Differentiates between the Kentico administration UI and the live site to distinguish between displaying a non-interactive
+    /// page builder widget and a fully interactive widget, respectively.
+    /// </summary>
     public bool InKenticoAdmin
     {
         get;
@@ -59,5 +63,8 @@ public class DisqusWidgetViewModel
         set;
     } = string.Empty;
 
+    /// <summary>
+    /// Indicates whether Disuqs comment count should be displayed in the site.
+    /// </summary>
     public bool DisplayCommentCount { get; set; } = false;
 }
