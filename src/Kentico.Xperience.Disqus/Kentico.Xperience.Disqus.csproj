@@ -26,10 +26,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="C:\Users\asus\Desktop\Work\xperience-by-kentico-disqus\\README.md" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <EmbeddedResource Include="Resources\DisqusResources.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>DisqusResources.Designer.cs</LastGenOutput>
