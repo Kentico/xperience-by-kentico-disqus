@@ -14,11 +14,11 @@ namespace DancingGoat.Models
         public async static Task<GrinderDetailViewModel> GetViewModel(GrinderPage grinderPage, string languageName, ITaxonomyRetriever taxonomyRetriever)
         {
             var grinder = grinderPage.RelatedItem.FirstOrDefault();
-            var image = grinder.Image.FirstOrDefault();
+            var image = grinder.ProductFieldsImage.FirstOrDefault();
 
             return new GrinderDetailViewModel(
-                grinder.Name,
-                grinder.Description,
+                grinder.ProductFieldsName,
+                grinder.ProductFieldsDescription,
                 image?.ImageFile.Url,
                 await taxonomyRetriever.RetrieveTags(grinder.GrinderManufacturer.Select(manufacturer => manufacturer.Identifier), languageName),
                 await taxonomyRetriever.RetrieveTags(grinder.GrinderType.Select(type => type.Identifier), languageName)

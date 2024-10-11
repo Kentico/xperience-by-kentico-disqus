@@ -14,11 +14,11 @@ namespace DancingGoat.Models
         public async static Task<CoffeeDetailViewModel> GetViewModel(CoffeePage coffeePage, string languageName, ITaxonomyRetriever taxonomyRetriever)
         {
             var coffee = coffeePage.RelatedItem.FirstOrDefault();
-            var image = coffee.Image.FirstOrDefault();
+            var image = coffee.ProductFieldsImage.FirstOrDefault();
 
             return new CoffeeDetailViewModel(
-                coffee.Name,
-                coffee.Description,
+                coffee.ProductFieldsName,
+                coffee.ProductFieldsDescription,
                 image?.ImageFile.Url,
                 await taxonomyRetriever.RetrieveTags(coffee.CoffeeTastes.Select(taste => taste.Identifier), languageName),
                 await taxonomyRetriever.RetrieveTags(coffee.CoffeeProcessing.Select(processing => processing.Identifier), languageName)
