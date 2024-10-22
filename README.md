@@ -15,6 +15,7 @@ This integration makes it easy to add the Disqus component by using predefined w
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
+| >= 29.5.3         | 2.1.0           |
 | >= 28.4.1         | 2.0.0           |
 
 ### Dependencies
