@@ -29,7 +29,7 @@ This integration makes it easy to add the Disqus component by using predefined w
 Add the package to your application using the .NET CLI
 
 ```powershell
-dotnet add package Kentico.Xperience.Disqus
+dotnet add package Kentico.Xperience.Disqus.Widget
 ```
 
 ## Quick Start
