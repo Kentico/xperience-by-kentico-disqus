@@ -55,6 +55,14 @@ stages:
           - name: ProjectPath
             value: src/Kentico.Xperience.Disqus/Kentico.Xperience.Disqus.csproj
 
+          # This parameter needs to be "re-saved" to variable
+          # Usages of this variable must be in runtime format: $(NuGetVersion)
+          - name: NuGetVersion
+            value: ${{ parameters.NuGetVersion }}
+
+          - name: ApiChangesConsoleFolder
+            value: $(System.DefaultWorkingDirectory)/tool
+
           - name: ReleasedProjectFolder
             value: $(System.DefaultWorkingDirectory)/ReleasedProject
           - name: ReleasedDllsFolder
@@ -109,23 +117,6 @@ stages:
               nobuild: true
               versioningScheme: off
 
-      - job: ApiChanges
-        displayName: Api Changes
-        container: Windows
-        workspace:
-          clean: resources
-        variables:
-          - template: ./var-templates/build-vars.yaml
-
-          # This parameter needs to be "re-saved" to variable
-          # Usages of this variable must be in runtime format: $(NuGetVersion)
-          - name: NuGetVersion
-            value: ${{ parameters.NuGetVersion }}
-
-          - name: ApiChangesConsoleFolder
-            value: $(System.DefaultWorkingDirectory)/tool
-
-        steps:
           # Download artifact from pipeline: [Tools] Api changes
           - task: DownloadPipelineArtifact@2
             displayName: Download Api Changes.Console
