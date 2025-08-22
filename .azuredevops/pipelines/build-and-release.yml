@@ -173,6 +173,11 @@ stages:
               archiveFilePatterns: $(System.ArtifactsDirectory)/ApiChanges.Console.zip
               destinationFolder: $(ApiChangesConsoleFolder)
 
+          - pwsh: |
+              $configPath = Join-Path "$(ApiChangesConsoleFolder)" "config.json"
+              New-Item -Path $configPath -ItemType File -Force | Out-Null
+            displayName: Create empty config.json file
+
           # - pwsh: >
           #     & $(BuildScriptsFolder)/Add-IgnoredApiChangesToConfigFile.ps1
           #     -ResolutionsFolder '$(ApiChangesFolder)/Resolutions'
