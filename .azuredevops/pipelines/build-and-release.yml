@@ -176,7 +176,7 @@ stages:
           - pwsh: |
               $configPath = Join-Path $(ApiChangesConsoleFolder) "config.json"
               New-Item -Path $configPath -ItemType File -Force | Out-Null
-              Set-Content -Path $configPath -Value '{ "Include": [], "Exclude": [], "Ignore": {} }'
+              Set-Content -Path $configPath -Value '{ "Include": ["Kentico.Xperience.Disqus.Widget.dll"], "Exclude": [], "Ignore": {} }'
             displayName: Create empty config.json file
 
           # - pwsh: >
