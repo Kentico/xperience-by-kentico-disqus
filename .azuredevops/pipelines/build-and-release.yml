@@ -206,5 +206,5 @@ stages:
               searchFolder: $(ApiChangesConsoleFolder)/
 
             # - template: ../step-templates/clean-up-pipeline-workspace.yaml
-            parameters:
-              UseGitCleanCommand: false
+            # parameters:
+            #   UseGitCleanCommand: false
