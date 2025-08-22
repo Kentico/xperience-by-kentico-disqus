@@ -140,9 +140,12 @@ stages:
                 & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
               }
 
-              # & dotnet tool restore
               & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
             displayName: Get released Dlls
+            env:
+              AuthenticodeClientSecret: $(AuthenticodeClientSecret)
+              # Roll-forward behavior set for AzureSignTool dotnet tool (see .config\dotnet-tools.json) which requires .Net 6.0 runtime
+              DOTNET_ROLL_FORWARD: Major
 
           - pwsh: |
               & dotnet new web
@@ -160,6 +163,10 @@ stages:
               & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
             displayName: Get current Dlls
             workingDirectory: $(CurrentProjectFolder)
+            env:
+              AuthenticodeClientSecret: $(AuthenticodeClientSecret)
+              # Roll-forward behavior set for AzureSignTool dotnet tool (see .config\dotnet-tools.json) which requires .Net 6.0 runtime
+              DOTNET_ROLL_FORWARD: Major
 
           - task: ExtractFiles@1
             displayName: Extract Api Changes tool
