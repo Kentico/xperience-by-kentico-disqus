@@ -139,7 +139,7 @@ stages:
                   $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
                   $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
 
-                  Write-Host "##[debug]Adding latest version of the NuGet package: $nugetName from file: $($nuget.FullName)"
+                  Write-Host "##[debug]Adding latest version of the NuGet package: $nugetName"
                   
                   & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
               }
@@ -161,7 +161,7 @@ stages:
                 $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
                 $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
 
-                Write-Host "##[debug]Adding version $(NuGetVersion) of the NuGet package: $nugetName from file: $($nuget.FullName)"
+                Write-Host "##[debug]Adding version $(NuGetVersion) of the NuGet package: $nugetName"
 
                 & dotnet add package $nugetName -v $(NuGetVersion)
               }
