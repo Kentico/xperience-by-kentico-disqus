@@ -140,7 +140,7 @@ stages:
                 & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
               }
 
-              & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
+              & dotnet publish -o '$(ReleasedDllsFolder)' -c Release -r win-x64 --self-contained
             displayName: Get released Dlls
             env:
               AuthenticodeClientSecret: $(AuthenticodeClientSecret)
@@ -159,7 +159,6 @@ stages:
                 & dotnet add package $nugetName -v $(NuGetVersion)
               }
 
-              & dotnet tool restore
               & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
             displayName: Get current Dlls
             workingDirectory: $(CurrentProjectFolder)
