@@ -140,7 +140,7 @@ stages:
                 & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
               }
 
-              & dotnet tool restore
+              # & dotnet tool restore
               & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
             displayName: Get released Dlls
 
