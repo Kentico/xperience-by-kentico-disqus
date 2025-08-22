@@ -134,10 +134,14 @@ stages:
               Set-Location -Path '$(ReleasedProjectFolder)'
 
               & dotnet new web
+
               foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
-                $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
-                $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
-                & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
+                  $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
+                  $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
+
+                  Write-Host "##[debug]Adding latest version of the NuGet package: $nugetName from file: $($nuget.FullName)"
+                  
+                  & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
               }
 
               & dotnet publish -o '$(ReleasedDllsFolder)' -c Release -r win-x64 --self-contained
@@ -156,6 +160,9 @@ stages:
               foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
                 $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
                 $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
+
+                Write-Host "##[debug]Adding version $(NuGetVersion) of the NuGet package: $nugetName from file: $($nuget.FullName)"
+
                 & dotnet add package $nugetName -v $(NuGetVersion)
               }
 
