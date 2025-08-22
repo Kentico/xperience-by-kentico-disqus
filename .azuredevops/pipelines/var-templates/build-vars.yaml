@@ -1,0 +1,36 @@
+variables:
+  # Folder structure variables
+  - name: SolutionFolder
+    value: $(System.DefaultWorkingDirectory)/CMSSolution
+  - name: WebProjectFolder
+    value: $(SolutionFolder)/CMS
+  - name: OutputFolder
+    value: $(SolutionFolder)/Output/Release
+  - name: InternalUtilitiesFolder
+    value: $(OutputFolder)/InternalUtilities
+  - name: AdminClientFolder
+    value: $(SolutionFolder)/Admin/Client
+  - name: LicensesFolder
+    value: $(SolutionFolder)/Resources/LicenseAgreement
+  - name: LicensesCheckFolder
+    value: $(System.DefaultWorkingDirectory)/Build/LicensesCheck
+  - name: ApiChangesFolder
+    value: $(System.DefaultWorkingDirectory)/Build/ApiChanges
+  - name: WebAppClientFolder
+    value: $(System.DefaultWorkingDirectory)/CMSSolution/Mvc/Client
+  - name: AdminSampleClientFolder
+    value: $(System.DefaultWorkingDirectory)/CMSSolution/Mvc/Projects/Kentico.Xperience.Admin.Sample/Client
+  - name: PipelinesFolder
+    value: $(System.DefaultWorkingDirectory)/Pipelines
+  - name: BuildScriptsFolder
+    value: $(PipelinesFolder)/_scripts
+
+  # Artifact folders variables
+  - name: NuGetPackagesArtifactFolder
+    value: $(Build.ArtifactStagingDirectory)/NuGetPackages
+  - name: InternalNuGetPackagesArtifactFolder
+    value: $(Build.ArtifactStagingDirectory)/InternalNuGetPackages
+
+  # SQL Data preparation variables
+  - name: DbBackupPackageVersion
+    value: 29.6.0

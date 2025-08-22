@@ -14,6 +14,15 @@ parameters:
     type: string
     default: " "
 
+  - name: NuGetVersion
+    displayName: NuGet version
+    type: string
+    default: 3.0.0
+
+  - name: ProductTfm
+    displayName: Product Target Framework
+    type: string
+    default: net8.0
 
 resources:
   repositories:
@@ -24,15 +33,11 @@ resources:
     - container: Windows
       image: mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022
 
-variables:
-  - name: SIGN_FILE
-    value: true
-
 stages:
   - stage: Build
     jobs:
       - job: Build
-        displayName: Build, Sign, and Pack
+        displayName: Build and Pack
 
         pool:
           name: ${{ parameters.AgentPoolName }}
@@ -49,6 +54,20 @@ stages:
 
           - name: ProjectPath
             value: src/Kentico.Xperience.Disqus/Kentico.Xperience.Disqus.csproj
+
+          - name: ReleasedProjectFolder
+            value: $(System.DefaultWorkingDirectory)/ReleasedProject
+          - name: ReleasedDllsFolder
+            value: $(ReleasedProjectFolder)/publish
+          - name: ReleasedNugetsFolder
+            value: $(ReleasedProjectFolder)/nugets
+
+          - name: CurrentProjectFolder
+            value: $(System.DefaultWorkingDirectory)/CurrentProject
+          - name: CurrentDllsFolder
+            value: $(CurrentProjectFolder)/publish
+          - name: CurrentNugetsFolder
+            value: $(CurrentProjectFolder)/nugets
 
         steps:
           - task: DotNetCoreCLI@2
@@ -85,54 +104,107 @@ stages:
               command: pack
               packagesToPack: ${{ variables.ProjectPath }}
               configuration: ${{ variables.Configuration }}
-              packDirectory: $(System.DefaultWorkingDirectory)/packages
+              packDirectory: $(CurrentNugetsFolder)
               includesymbols: true
               nobuild: true
               versioningScheme: off
 
-          - publish: $(System.DefaultWorkingDirectory)/packages
-            displayName: Publish NuGet package as artifact
-            artifact: artifact
+      - job: ApiChanges
+        displayName: Api Changes
+        container: Windows
+        workspace:
+          clean: resources
+        variables:
+          - template: ./var-templates/build-vars.yaml
 
-  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
-      - stage: PublishNuGetPackages
-        displayName: Publish NuGet packages
-        dependsOn: Build
+          # This parameter needs to be "re-saved" to variable
+          # Usages of this variable must be in runtime format: $(NuGetVersion)
+          - name: NuGetVersion
+            value: ${{ parameters.NuGetVersion }}
 
-        jobs:
-          - deployment: PublishNuGetPackages
-            displayName: Publish NuGet packages
+          - name: ApiChangesConsoleFolder
+            value: $(System.DefaultWorkingDirectory)/tool
 
-            pool:
-              name: ${{ parameters.AgentPoolName }}
-              ${{ if ne(length(parameters.AgentName), 1) }}:
-                demands:
-                  - Agent.Name -equals ${{ parameters.AgentName }}
-            container: Windows
+        steps:
+          # Download artifact from pipeline: [Tools] Api changes
+          - task: DownloadPipelineArtifact@2
+            displayName: Download Api Changes.Console
+            inputs:
+              buildType: specific
+              project: CMS
+              definition: "578"
+              buildVersionToDownload: latestFromBranch
+              branchName: refs/heads/master
+              artifact: ApiChanges.Console
+              path: $(System.ArtifactsDirectory)
 
-            environment: integrations-release-nuget
-            workspace:
-              clean: all
-            strategy:
-              runOnce:
-                deploy:
-                  steps:
-                    - checkout: none
+          - pwsh: |
+              $null = New-Item -Path '$(ReleasedProjectFolder)' -ItemType 'Directory'
+              Set-Location -Path '$(ReleasedProjectFolder)'
 
-                    - task: NuGetToolInstaller@1
-                      displayName: Install latest nuget.exe
-                      inputs:
-                        versionSpec: ">=5.6"
-                        checkLatest: true
+              & dotnet new web
+              foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
+                $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
+                $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
+                & dotnet add package $nugetName --prerelease -s https://api.nuget.org/v3/index.json
+              }
 
-                    - task: NuGetAuthenticate@1
-                      displayName: NuGet Authenticate
+              & dotnet tool restore
+              & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
+            displayName: Get released Dlls
 
-                    - task: NuGetCommand@2
-                      displayName: NuGet push
-                      inputs:
-                        command: push
-                        packagesToPush: $(Pipeline.Workspace)/artifact/*.nupkg
-                        nuGetFeedType: external
-                        publishFeedCredentials: nuget.org
-                        allowPackageConflicts: true
+          - pwsh: |
+              & dotnet new web
+
+              & dotnet new nugetconfig
+              & dotnet nuget add source '$(CurrentNugetsFolder)' --name local
+
+              foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
+                $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
+                $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
+                & dotnet add package $nugetName -v $(NuGetVersion)
+              }
+
+              & dotnet tool restore
+              & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
+            displayName: Get current Dlls
+            workingDirectory: $(CurrentProjectFolder)
+
+          - task: ExtractFiles@1
+            displayName: Extract Api Changes tool
+            inputs:
+              archiveFilePatterns: $(System.ArtifactsDirectory)/ApiChanges.Console.zip
+              destinationFolder: $(ApiChangesConsoleFolder)
+
+          # - pwsh: >
+          #     & $(BuildScriptsFolder)/Add-IgnoredApiChangesToConfigFile.ps1
+          #     -ResolutionsFolder '$(ApiChangesFolder)/Resolutions'
+          #     -SourcePath '$(ApiChangesFolder)/config.source.json'
+          #     -TargetPath '$(ApiChangesFolder)/config.json'
+          #   displayName: Generate API changes config file
+
+          # - pwsh: >
+          #     & $(BuildScriptsFolder)/Add-IgnoredApiChangesToConfigFile.ps1
+          #     -ResolutionsFolder '$(ApiChangesFolder)/Resolutions/${{ parameters.ProductTfm }}'
+          #     -SourcePath '$(ApiChangesFolder)/config.json'
+          #     -TargetPath '$(ApiChangesFolder)/config.json'
+          #   displayName: Add API changes related of specified dotnet version to config file
+
+          - script: >
+              $(ApiChangesConsoleFolder)/ApiChanges.Console.exe
+              -s "$(ReleasedDllsFolder)"
+              -t "$(CurrentDllsFolder)"
+              -c "$(ApiChangesFolder)/config.json"
+            displayName: Run Api Changes detection
+
+          - task: PublishTestResults@2
+            displayName: Publish Test Results **/TEST-*.xml
+            condition: succeededOrFailed()
+            inputs:
+              testRunTitle: $(System.StageDisplayName)
+              testResultsFormat: NUnit
+              searchFolder: $(ApiChangesConsoleFolder)/
+
+            # - template: ../step-templates/clean-up-pipeline-workspace.yaml
+            parameters:
+              UseGitCleanCommand: false
