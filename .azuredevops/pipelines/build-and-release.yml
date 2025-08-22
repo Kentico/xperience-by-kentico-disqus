@@ -180,23 +180,23 @@ stages:
 
           # - pwsh: >
           #     & $(BuildScriptsFolder)/Add-IgnoredApiChangesToConfigFile.ps1
-          #     -ResolutionsFolder '$(ApiChangesFolder)/Resolutions'
-          #     -SourcePath '$(ApiChangesFolder)/config.source.json'
-          #     -TargetPath '$(ApiChangesFolder)/config.json'
+          #     -ResolutionsFolder '$(ApiChangesConsoleFolder)/Resolutions'
+          #     -SourcePath '$(ApiChangesConsoleFolder)/config.source.json'
+          #     -TargetPath '$(ApiChangesConsoleFolder)/config.json'
           #   displayName: Generate API changes config file
 
           # - pwsh: >
           #     & $(BuildScriptsFolder)/Add-IgnoredApiChangesToConfigFile.ps1
-          #     -ResolutionsFolder '$(ApiChangesFolder)/Resolutions/${{ parameters.ProductTfm }}'
-          #     -SourcePath '$(ApiChangesFolder)/config.json'
-          #     -TargetPath '$(ApiChangesFolder)/config.json'
+          #     -ResolutionsFolder '$(ApiChangesConsoleFolder)/Resolutions/${{ parameters.ProductTfm }}'
+          #     -SourcePath '$(ApiChangesConsoleFolder)/config.json'
+          #     -TargetPath '$(ApiChangesConsoleFolder)/config.json'
           #   displayName: Add API changes related of specified dotnet version to config file
 
           - script: >
               $(ApiChangesConsoleFolder)/ApiChanges.Console.exe
               -s "$(ReleasedDllsFolder)"
               -t "$(CurrentDllsFolder)"
-              -c "$(ApiChangesFolder)/config.json"
+              -c "$(ApiChangesConsoleFolder)/config.json"
             displayName: Run Api Changes detection
 
           - task: PublishTestResults@2
