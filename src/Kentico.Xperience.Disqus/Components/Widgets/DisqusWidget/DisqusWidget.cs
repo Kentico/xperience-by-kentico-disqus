@@ -83,7 +83,7 @@ public class DisqusWidget : ViewComponent
             identifier = widgetProperties.Page.WebPageItemID.ToString();
         }
 
-        var options = configuration.GetSection(DisqusOptions.SECTION_NAME).Get<DisqusOptions>();
+        var options = configuration.GetSection("CMSDisqus").Get<DisqusOptions>();
 
         if (string.IsNullOrEmpty(options?.SiteShortName))
         {
