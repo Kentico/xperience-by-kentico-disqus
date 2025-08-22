@@ -12,6 +12,7 @@ using CMS.Helpers;
 using Kentico.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Xperience.Disqus.Widgets;
+using Kentico.Xperience.Disqus.BreakingChange;
 
 [assembly: CMS.AssemblyDiscoverable]
 [assembly: RegisterWidget(DisqusWidget.IDENTIFIER,
