@@ -176,6 +176,7 @@ stages:
           - pwsh: |
               $configPath = Join-Path $(ApiChangesConsoleFolder) "config.json"
               New-Item -Path $configPath -ItemType File -Force | Out-Null
+              Set-Content -Path $configPath -Value '{}'
             displayName: Create empty config.json file
 
           # - pwsh: >
