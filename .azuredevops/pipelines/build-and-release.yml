@@ -17,7 +17,7 @@ parameters:
   - name: NuGetVersion
     displayName: NuGet version
     type: string
-    default: 3.0.0
+    default: 3.0.1
 
   - name: ProductTfm
     displayName: Product Target Framework
@@ -215,6 +215,9 @@ stages:
               testResultsFormat: NUnit
               searchFolder: $(ApiChangesConsoleFolder)/
 
-            # - template: ../step-templates/clean-up-pipeline-workspace.yaml
-            # parameters:
-            #   UseGitCleanCommand: false
+          - pwsh: |
+              dotnet tool install --global Microsoft.DotNet.ApiCompat.Tool
+              $releasedDllPath = Join-Path -Path '$(ReleasedDllsFolder)' -ChildPath 'Kentico.Xperience.Disqus.dll'
+              $currentDllPath = Join-Path -Path '$(CurrentDllsFolder)' -ChildPath 'Kentico.Xperience.Disqus.dll'
+              apicompat --left $releasedDllPath --right $currentDllPath
+            displayName: Install & run API combat tool
