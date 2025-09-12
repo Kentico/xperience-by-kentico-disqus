@@ -133,7 +133,7 @@ stages:
               $null = New-Item -Path '$(ReleasedProjectFolder)' -ItemType 'Directory'
               Set-Location -Path '$(ReleasedProjectFolder)'
 
-              & dotnet new web
+              & dotnet new web -f ${{ parameters.ProductTfm }}
 
               foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
                   $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
@@ -152,7 +152,7 @@ stages:
               DOTNET_ROLL_FORWARD: Major
 
           - pwsh: |
-              & dotnet new web
+              & dotnet new web -f ${{ parameters.ProductTfm }}
 
               & dotnet new nugetconfig
               & dotnet nuget add source '$(CurrentNugetsFolder)' --name local
