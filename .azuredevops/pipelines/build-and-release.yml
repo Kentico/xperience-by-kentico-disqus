@@ -175,12 +175,23 @@ stages:
               DOTNET_ROLL_FORWARD: Major
 
           - pwsh: |
+              Write-Host "Listing files in $(ReleasedDllsFolder):"
+              Get-ChildItem -Path "$(ReleasedDllsFolder)" -Recurse | ForEach-Object {
+                Write-Host $_.FullName
+              }
+            displayName: List files in Released folder
+
+          - pwsh: |
+              Write-Host "Listing files in $(CurrentDllsFolder):"
+              Get-ChildItem -Path "$(CurrentDllsFolder)" -Recurse | ForEach-Object {
+                Write-Host $_.FullName
+              }
+            displayName: List files in Current folder
+
+          - pwsh: |
               dotnet tool install --global Microsoft.DotNet.ApiCompat.Tool
               $releasedDllPath = Join-Path '$(ReleasedDllsFolder)' 'Kentico.Xperience.Disqus.dll'
               $currentDllPath = Join-Path '$(CurrentDllsFolder)' 'Kentico.Xperience.Disqus.dll'
-
-              Write-Host "Rel path: $releasedDllPath"
-              Write-Host "Current path: $currentDllPath"
 
               apicompat --left $releasedDllPath --right $currentDllPath
             displayName: Install & run API combat tool
