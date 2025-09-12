@@ -161,7 +161,23 @@ stages:
           - pwsh: |
               & dotnet new web -f ${{ parameters.ProductTfm }}
 
+              & dotnet new nugetconfig
               & dotnet nuget add source '$(CurrentNugetsFolder)' --name local
+
+              $nugetConfigFilePath = Join-Path (Get-Location) "nuget.config"
+              [xml]$xml = Get-Content $nugetConfigFilePath
+
+              $packageSourceMapping = $xml.CreateElement("packageSourceMapping")
+              $xml.configuration.AppendChild($packageSourceMapping) | Out-Null
+
+              $packageSource = $xml.CreateElement("packageSource")
+              $packageSource.SetAttribute("key", "local")
+              $package = $xml.CreateElement("package")
+              $package.SetAttribute("pattern", "Kentico.Xperience.Disqus.Widget")
+              $packageSource.AppendChild($package) | Out-Null
+              $packageSourceMapping.AppendChild($packageSource) | Out-Null
+
+              Set-Content -Path $nugetConfigFilePath -Value $xml.OuterXml
 
               foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
                 $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
@@ -169,7 +185,7 @@ stages:
 
                 Write-Host "##[debug]Adding version $(NuGetVersion) of the NuGet package: $nugetName"
 
-                & dotnet add package $nugetName -v $(NuGetVersion) -s local
+                & dotnet add package $nugetName -v $(NuGetVersion)
               }
 
               & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
