@@ -170,7 +170,7 @@ stages:
 
                 Write-Host "##[debug]Adding version $(NuGetVersion) of the NuGet package: $nugetName"
 
-                & dotnet add package $nugetName -v $(NuGetVersion) -s local
+                & dotnet add package $nugetName -v $(NuGetVersion) -s '$(CurrentNugetsFolder)'
               }
 
               & dotnet publish -o '$(CurrentDllsFolder)' -c Release -r win-x64 --self-contained
