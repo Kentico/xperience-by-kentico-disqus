@@ -130,6 +130,13 @@ stages:
               path: $(System.ArtifactsDirectory)
 
           - pwsh: |
+              Write-Host "Listing files in $(CurrentNugetsFolder):"
+              Get-ChildItem -Path "$(CurrentNugetsFolder)" -Recurse | ForEach-Object {
+                Write-Host $_.FullName
+              }
+            displayName: List files in Current nugets folder
+
+          - pwsh: |
               $null = New-Item -Path '$(ReleasedProjectFolder)' -ItemType 'Directory'
               Set-Location -Path '$(ReleasedProjectFolder)'
 
