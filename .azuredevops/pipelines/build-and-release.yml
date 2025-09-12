@@ -130,13 +130,6 @@ stages:
               path: $(System.ArtifactsDirectory)
 
           - pwsh: |
-              Write-Host "Listing files in $(CurrentNugetsFolder):"
-              Get-ChildItem -Path "$(CurrentNugetsFolder)" -Recurse | ForEach-Object {
-                Write-Host $_.FullName
-              }
-            displayName: List files in Current nugets folder
-
-          - pwsh: |
               $null = New-Item -Path '$(ReleasedProjectFolder)' -ItemType 'Directory'
               Set-Location -Path '$(ReleasedProjectFolder)'
 
@@ -205,31 +198,18 @@ stages:
               DOTNET_ROLL_FORWARD: Major
 
           - pwsh: |
-              Write-Host "Listing files in $(ReleasedDllsFolder):"
-              Get-ChildItem -Path "$(ReleasedDllsFolder)" -Recurse | ForEach-Object {
-                Write-Host $_.FullName
-              }
-            displayName: List files in Released folder
-
-          - pwsh: |
-              Write-Host "Listing files in $(CurrentDllsFolder):"
-              Get-ChildItem -Path "$(CurrentDllsFolder)" -Recurse | ForEach-Object {
-                Write-Host $_.FullName
-              }
-            displayName: List files in Current folder
-
-          - pwsh: |
               dotnet tool install --global Microsoft.DotNet.ApiCompat.Tool
               $releasedDllPath = Join-Path '$(ReleasedDllsFolder)' 'Kentico.Xperience.Disqus.dll'
               $currentDllPath = Join-Path '$(CurrentDllsFolder)' 'Kentico.Xperience.Disqus.dll'
 
-              apicompat --left $releasedDllPath --right $currentDllPath
+              $output = apicompat --left $releasedDllPath --right $currentDllPath | Out-String
 
-              if ($LASTEXITCODE -ne 0) {
-                Write-Error "API combat tool detected breaking changes or failed to run."
-                exit $LASTEXITCODE
+              # This is pretty naive
+              if ($output -match "API compatibility errors") {
+                Write-Error "API combat tool detected breaking changes."
+                exit 1
               }
-            displayName: Install & run API combat tool
+            displayName: Install & run API combat tool and fail on breaking changes
 
           - task: ExtractFiles@1
             displayName: Extract Api Changes tool
