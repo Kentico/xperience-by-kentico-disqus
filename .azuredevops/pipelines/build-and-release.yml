@@ -172,10 +172,18 @@ stages:
 
               $packageSource = $xml.CreateElement("packageSource")
               $packageSource.SetAttribute("key", "local")
-              $package = $xml.CreateElement("package")
-              $package.SetAttribute("pattern", "Kentico.Xperience.Disqus.Widget")
-              $packageSource.AppendChild($package) | Out-Null
+
               $packageSourceMapping.AppendChild($packageSource) | Out-Null
+
+              foreach ($nuget in Get-ChildItem -Path '$(CurrentNugetsFolder)/*' -Include '*.nupkg') {
+                $nugetVersionStart = $nuget.BaseName.IndexOf('.$(NuGetVersion)')
+                $nugetName = $nuget.BaseName.Substring(0, $nugetVersionStart)
+
+                $package = $xml.CreateElement("package")
+                $package.SetAttribute("pattern", $nugetName)
+
+                $packageSource.AppendChild($package) | Out-Null
+              }
 
               Set-Content -Path $nugetConfigFilePath -Value $xml.OuterXml
 
@@ -216,6 +224,11 @@ stages:
               $currentDllPath = Join-Path '$(CurrentDllsFolder)' 'Kentico.Xperience.Disqus.dll'
 
               apicompat --left $releasedDllPath --right $currentDllPath
+
+              if ($LASTEXITCODE -ne 0) {
+                Write-Error "API combat tool detected breaking changes or failed to run."
+                exit $LASTEXITCODE
+              }
             displayName: Install & run API combat tool
 
           - task: ExtractFiles@1
