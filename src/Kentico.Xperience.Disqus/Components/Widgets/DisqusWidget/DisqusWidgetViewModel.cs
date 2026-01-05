@@ -64,7 +64,7 @@ public class DisqusWidgetViewModel
     } = string.Empty;
 
     /// <summary>
-    /// Indicates whether Disuqs comment count should be displayed in the site.
+    /// Indicates whether Disqus comment count should be displayed in the site.
     /// </summary>
     public bool DisplayCommentCount { get; set; } = false;
 }
