@@ -24,11 +24,8 @@ namespace DancingGoat.Helpers
         }
 
 
-        private static IEnumerable<string> GetWidgetsIdentifiers()
-        {
-            return new ComponentDefinitionProvider<WidgetDefinition>()
+        private static IEnumerable<string> GetWidgetsIdentifiers() => new ComponentDefinitionProvider<WidgetDefinition>()
                    .GetAll()
                    .Select(definition => definition.Identifier);
-        }
     }
 }

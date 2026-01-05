@@ -35,19 +35,9 @@ namespace DancingGoat
         /// <inheritdoc/>
         public async Task<string> Get(CancellationToken cancellationToken = default)
         {
-            var websiteChannel = await websiteChannelInfoProvider.GetAsync(websiteChannelContext.WebsiteChannelID, cancellationToken);
+            var websiteChannel = await websiteChannelInfoProvider.GetAsync(websiteChannelContext.WebsiteChannelID, cancellationToken) ?? throw new InvalidOperationException($"Website channel with ID {websiteChannelContext.WebsiteChannelID} does not exist.");
 
-            if (websiteChannel == null)
-            {
-                throw new InvalidOperationException($"Website channel with ID {websiteChannelContext.WebsiteChannelID} does not exist.");
-            }
-
-            var languageInfo = await contentLanguageInfoProvider.GetAsync(websiteChannel.WebsiteChannelPrimaryContentLanguageID, cancellationToken);
-
-            if (languageInfo == null)
-            {
-                throw new InvalidOperationException($"Content language with ID {websiteChannel.WebsiteChannelPrimaryContentLanguageID} does not exist.");
-            }
+            var languageInfo = await contentLanguageInfoProvider.GetAsync(websiteChannel.WebsiteChannelPrimaryContentLanguageID, cancellationToken) ?? throw new InvalidOperationException($"Content language with ID {websiteChannel.WebsiteChannelPrimaryContentLanguageID} does not exist.");
 
             return languageInfo.ContentLanguageName;
         }

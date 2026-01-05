@@ -11,7 +11,7 @@ namespace DancingGoat.Models
         /// <summary>
         /// Maps <see cref="CoffeePage"/> to a <see cref="CoffeeDetailViewModel"/>.
         /// </summary>
-        public async static Task<CoffeeDetailViewModel> GetViewModel(CoffeePage coffeePage, string languageName, ITaxonomyRetriever taxonomyRetriever)
+        public static async Task<CoffeeDetailViewModel> GetViewModel(CoffeePage coffeePage, string languageName, ITaxonomyRetriever taxonomyRetriever)
         {
             var coffee = coffeePage.RelatedItem.FirstOrDefault();
             var image = coffee.ProductFieldsImage.FirstOrDefault();

@@ -36,16 +36,13 @@ namespace DancingGoat.Models
         }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int webPageItemId, string languageName)
-        {
-            return new ContentItemQueryBuilder()
+        private ContentItemQueryBuilder GetQueryBuilder(int webPageItemId, string languageName) => new ContentItemQueryBuilder()
                     .ForContentType(PrivacyPage.CONTENT_TYPE_NAME, config => config
                         .ForWebsite(WebsiteChannelContext.WebsiteChannelName, includeUrlPath: false)
                     .Where(where => where
                             .WhereEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemID), webPageItemId))
                     .TopN(1))
                     .InLanguage(languageName);
-        }
 
 
         private static Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<PrivacyPage> privacyPages, CancellationToken cancellationToken)

@@ -17,16 +17,10 @@ namespace DancingGoat.Helpers.Generator
         /// Initializes a new instance of the <see cref="FormContactGroupGenerator"/> class.
         /// </summary>
         /// <param name="contactGroupInfoProvider">Contact group info provider.</param>
-        public FormContactGroupGenerator(IInfoProvider<ContactGroupInfo> contactGroupInfoProvider)
-        {
-            this.contactGroupInfoProvider = contactGroupInfoProvider;
-        }
+        public FormContactGroupGenerator(IInfoProvider<ContactGroupInfo> contactGroupInfoProvider) => this.contactGroupInfoProvider = contactGroupInfoProvider;
 
 
-        public void Generate()
-        {
-            CreateContactGroupWithFormConsentAgreementRule();
-        }
+        public void Generate() => CreateContactGroupWithFormConsentAgreementRule();
 
 
         private void CreateContactGroupWithFormConsentAgreementRule()

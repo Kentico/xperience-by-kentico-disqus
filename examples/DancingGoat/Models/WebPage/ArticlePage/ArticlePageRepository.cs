@@ -28,10 +28,7 @@ namespace DancingGoat.Models
             IContentQueryExecutor executor,
             IProgressiveCache cache,
             IWebPageLinkedItemsDependencyAsyncRetriever webPageLinkedItemsDependencyRetriever)
-            : base(websiteChannelContext, executor, cache)
-        {
-            this.webPageLinkedItemsDependencyRetriever = webPageLinkedItemsDependencyRetriever;
-        }
+            : base(websiteChannelContext, executor, cache) => this.webPageLinkedItemsDependencyRetriever = webPageLinkedItemsDependencyRetriever;
 
 
         /// <summary>
@@ -88,48 +85,33 @@ namespace DancingGoat.Models
 
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int topN, string treePath, string languageName)
-        {
-            return GetQueryBuilder(
+        private ContentItemQueryBuilder GetQueryBuilder(int topN, string treePath, string languageName) => GetQueryBuilder(
                 languageName,
                 config => config
                     .WithLinkedItems(1)
                     .TopN(topN)
                     .OrderBy(OrderByColumn.Desc(nameof(ArticlePage.ArticlePagePublishDate)))
                     .ForWebsite(WebsiteChannelContext.WebsiteChannelName, PathMatch.Children(treePath)));
-        }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(ICollection<Guid> guids, string languageName)
-        {
-            return new ContentItemQueryBuilder().ForContentTypes(q =>
-            {
-                q.ForWebsite(guids)
-                 .WithContentTypeFields()
-                 .WithLinkedItems(1);
-            }).InLanguage(languageName)
+        private ContentItemQueryBuilder GetQueryBuilder(ICollection<Guid> guids, string languageName) => new ContentItemQueryBuilder().ForContentTypes(q => q.ForWebsite(guids)
+                                                                                                                       .WithContentTypeFields()
+                                                                                                                       .WithLinkedItems(1)).InLanguage(languageName)
             .Parameters(q =>
                 q.OrderBy(OrderByColumn.Desc(nameof(ArticlePage.ArticlePagePublishDate))));
-        }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName)
-        {
-            return GetQueryBuilder(
+        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName) => GetQueryBuilder(
                 languageName,
                 config => config
                     .WithLinkedItems(1)
                     .ForWebsite(WebsiteChannelContext.WebsiteChannelName)
                     .Where(where => where.WhereEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemID), id)));
-        }
 
 
-        private static ContentItemQueryBuilder GetQueryBuilder(string languageName, Action<ContentTypeQueryParameters> configureQuery = null)
-        {
-            return new ContentItemQueryBuilder()
+        private static ContentItemQueryBuilder GetQueryBuilder(string languageName, Action<ContentTypeQueryParameters> configureQuery = null) => new ContentItemQueryBuilder()
                     .ForContentType(ArticlePage.CONTENT_TYPE_NAME, configureQuery)
                     .InLanguage(languageName);
-        }
 
 
         private async Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<ArticlePage> articles, CancellationToken cancellationToken)
@@ -155,13 +137,13 @@ namespace DancingGoat.Models
                 return Enumerable.Empty<string>();
             }
 
-            return new List<string>()
-            {
+            return
+            [
                 CacheHelper.BuildCacheItemName(new[] { "webpageitem", "byid", article.SystemFields.WebPageItemID.ToString() }, false),
                 CacheHelper.BuildCacheItemName(new[] { "webpageitem", "bychannel", WebsiteChannelContext.WebsiteChannelName, "bypath", article.SystemFields.WebPageItemTreePath }, false),
                 CacheHelper.BuildCacheItemName(new[] { "webpageitem", "bychannel", WebsiteChannelContext.WebsiteChannelName, "childrenofpath", DataHelper.GetParentPath(article.SystemFields.WebPageItemTreePath) }, false),
                 CacheHelper.GetCacheItemName(null, ContentLanguageInfo.OBJECT_TYPE, "all")
-            };
+            ];
         }
     }
 }

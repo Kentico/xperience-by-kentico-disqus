@@ -17,10 +17,7 @@ namespace DancingGoat.Models
 
 
         public ProductSectionRepository(IWebsiteChannelContext websiteChannelContext, IContentQueryExecutor executor, IProgressiveCache cache, ILinkedItemsDependencyAsyncRetriever linkedItemsDependencyRetriever)
-            : base(websiteChannelContext, executor, cache)
-        {
-            this.linkedItemsDependencyRetriever = linkedItemsDependencyRetriever;
-        }
+            : base(websiteChannelContext, executor, cache) => this.linkedItemsDependencyRetriever = linkedItemsDependencyRetriever;
 
 
         public async Task<ProductsSection> GetProductsSection(int id, string languageName, CancellationToken cancellationToken = default)
@@ -67,9 +64,7 @@ namespace DancingGoat.Models
         }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName)
-        {
-            return new ContentItemQueryBuilder()
+        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName) => new ContentItemQueryBuilder()
                 .ForContentType(ProductsSection.CONTENT_TYPE_NAME,
                 config =>
                     config
@@ -77,6 +72,5 @@ namespace DancingGoat.Models
                         .Where(where => where.WhereEquals(nameof(WebPageFields.WebPageItemID), id))
                         .TopN(1))
                 .InLanguage(languageName);
-        }
     }
 }

@@ -78,12 +78,9 @@ namespace DancingGoat.Models
 
         private static async Task<ContentItemQueryBuilder> GetQueryBuilder(string languageName, IEnumerable<Guid> productGuids = null, IDictionary<string, TaxonomyViewModel> filter = null)
         {
-            var baseBuilder = new ContentItemQueryBuilder().ForContentTypes(ct =>
-                {
-                    ct.OfReusableSchema(IProductFields.REUSABLE_FIELD_SCHEMA_NAME)
+            var baseBuilder = new ContentItemQueryBuilder().ForContentTypes(ct => ct.OfReusableSchema(IProductFields.REUSABLE_FIELD_SCHEMA_NAME)
                       .WithContentTypeFields()
-                      .WithLinkedItems(1);
-                }).InLanguage(languageName);
+                      .WithLinkedItems(1)).InLanguage(languageName);
 
             if (productGuids != null)
             {

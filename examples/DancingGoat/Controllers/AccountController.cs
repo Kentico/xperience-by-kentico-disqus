@@ -51,17 +51,14 @@ namespace DancingGoat.Controllers
             this.websiteChannelProvider = websiteChannelProvider;
             this.webPageUrlRetriever = webPageUrlRetriever;
             this.websiteChannelContext = websiteChannelContext;
-            this.currentLanguageRetriever = preferredLanguageRetriever;
+            currentLanguageRetriever = preferredLanguageRetriever;
         }
 
 
         // GET: Account/Login
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login()
-        {
-            return View();
-        }
+        public ActionResult Login() => View();
 
 
         // POST: Account/Login
@@ -115,10 +112,7 @@ namespace DancingGoat.Controllers
 
 
         // GET: Account/Register
-        public ActionResult Register()
-        {
-            return View();
-        }
+        public ActionResult Register() => View();
 
 
         // POST: Account/Register

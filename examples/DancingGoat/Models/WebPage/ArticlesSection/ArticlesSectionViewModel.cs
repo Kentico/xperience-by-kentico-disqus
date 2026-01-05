@@ -14,12 +14,9 @@ namespace DancingGoat.Models
         /// <summary>
         /// Maps <see cref="ArticlesSection"/> to a <see cref="ArticlesSectionViewModel"/>.
         /// </summary>
-        public static ArticlesSectionViewModel GetViewModel(ArticlesSection articlesSection, IEnumerable<ArticleViewModel> Articles, string ArticlesPath)
+        public static ArticlesSectionViewModel GetViewModel(ArticlesSection articlesSection, IEnumerable<ArticleViewModel> Articles, string ArticlesPath) => new(Articles, ArticlesPath)
         {
-            return new ArticlesSectionViewModel(Articles, ArticlesPath)
-            {
-                WebPage = articlesSection
-            };
-        }
+            WebPage = articlesSection
+        };
     }
 }

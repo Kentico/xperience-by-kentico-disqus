@@ -13,7 +13,7 @@ namespace Samples.DancingGoat
     /// </summary>
     internal sealed class HumanReadablePersonalDataWriter : IPersonalDataWriter
     {
-        private static readonly string DECIMAL_PRECISION = new string('#', 26);
+        private static readonly string DECIMAL_PRECISION = new('#', 26);
         private static readonly string DECIMAL_FORMAT = "{0:0.00" + DECIMAL_PRECISION + "}";
 
         private readonly StringBuilder stringBuilder;
@@ -56,10 +56,7 @@ namespace Samples.DancingGoat
         /// <summary>
         /// Writes appropriate indentation.
         /// </summary>
-        private void Indent()
-        {
-            stringBuilder.Append('\t', indentationLevel);
-        }
+        private void Indent() => stringBuilder.Append('\t', indentationLevel);
 
 
         /// <summary>
@@ -164,10 +161,7 @@ namespace Samples.DancingGoat
         /// Gets result of previous write calls.
         /// </summary>
         /// <returns>String containing formatted data.</returns>
-        public string GetResult()
-        {
-            return stringBuilder.ToString();
-        }
+        public string GetResult() => stringBuilder.ToString();
 
 
         /// <summary>

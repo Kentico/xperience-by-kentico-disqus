@@ -10,6 +10,6 @@ namespace DancingGoat.Models
         /// <summary>
         /// Web page which the view model is based on.
         /// </summary>
-        IWebPageFieldsSource WebPage { get; }
+        public IWebPageFieldsSource WebPage { get; }
     }
 }

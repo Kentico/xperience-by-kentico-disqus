@@ -44,9 +44,6 @@ namespace DancingGoat
         }
 
 
-        private static void AddViewComponentServices(IServiceCollection services)
-        {
-            services.AddSingleton<NavigationService>();
-        }
+        private static void AddViewComponentServices(IServiceCollection services) => services.AddSingleton<NavigationService>();
     }
 }

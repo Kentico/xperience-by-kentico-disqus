@@ -10,7 +10,7 @@ namespace DancingGoat.Models
         /// </summary>
         public static SocialLinkViewModel GetViewModel(SocialLink socialLink)
         {
-            var socialLinkUrl = Uri.TryCreate(socialLink.SocialLinkUrl, UriKind.Absolute, out var _) ? socialLink.SocialLinkUrl : String.Empty;
+            var socialLinkUrl = Uri.TryCreate(socialLink.SocialLinkUrl, UriKind.Absolute, out var _) ? socialLink.SocialLinkUrl : string.Empty;
             return new SocialLinkViewModel(socialLink.SocialLinkTitle, socialLinkUrl, socialLink.SocialLinkIcon.FirstOrDefault()?.ImageFile?.Url);
         }
     }

@@ -19,10 +19,7 @@ namespace Samples.DancingGoat
         /// Initializes a new instance of the <see cref="SampleMemberInfoIdentityCollector"/> class.
         /// </summary>
         /// <param name="memberInfoProvider">Member info provider.</param>
-        public SampleMemberInfoIdentityCollector(IMemberInfoProvider memberInfoProvider)
-        {
-            this.memberInfoProvider = memberInfoProvider;
-        }
+        public SampleMemberInfoIdentityCollector(IMemberInfoProvider memberInfoProvider) => this.memberInfoProvider = memberInfoProvider;
 
 
         /// <summary>

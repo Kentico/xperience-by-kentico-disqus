@@ -23,10 +23,7 @@ namespace DancingGoat.Models
             IContentQueryExecutor executor,
             IProgressiveCache cache,
             ILinkedItemsDependencyAsyncRetriever linkedItemsDependencyRetriever)
-            : base(websiteChannelContext, executor, cache)
-        {
-            this.linkedItemsDependencyRetriever = linkedItemsDependencyRetriever;
-        }
+            : base(websiteChannelContext, executor, cache) => this.linkedItemsDependencyRetriever = linkedItemsDependencyRetriever;
 
         /// <summary>
         /// Returns an enumerable collection of cafes.
@@ -41,15 +38,12 @@ namespace DancingGoat.Models
         }
 
 
-        private static ContentItemQueryBuilder GetQueryBuilder(int count, string languageName)
-        {
-            return new ContentItemQueryBuilder()
+        private static ContentItemQueryBuilder GetQueryBuilder(int count, string languageName) => new ContentItemQueryBuilder()
                     .ForContentType(Cafe.CONTENT_TYPE_NAME,
                         config => config
                         .WithLinkedItems(1)
                         .TopN(count))
                     .InLanguage(languageName);
-        }
 
 
         private async Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<Cafe> cafes, CancellationToken cancellationToken)

@@ -23,10 +23,7 @@ namespace DancingGoat.Models
         /// Initializes new instance of <see cref="HomePageRepository"/>.
         /// </summary>
         public HomePageRepository(IWebsiteChannelContext websiteChannelContext, IContentQueryExecutor executor, IProgressiveCache cache, IWebPageLinkedItemsDependencyAsyncRetriever webPageLinkedItemsDependencyRetriever)
-            : base(websiteChannelContext, executor, cache)
-        {
-            this.webPageLinkedItemsDependencyRetriever = webPageLinkedItemsDependencyRetriever;
-        }
+            : base(websiteChannelContext, executor, cache) => this.webPageLinkedItemsDependencyRetriever = webPageLinkedItemsDependencyRetriever;
 
 
         /// <summary>
@@ -44,9 +41,7 @@ namespace DancingGoat.Models
         }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int webPageItemId, string languageName)
-        {
-            return new ContentItemQueryBuilder()
+        private ContentItemQueryBuilder GetQueryBuilder(int webPageItemId, string languageName) => new ContentItemQueryBuilder()
                     .ForContentType(HomePage.CONTENT_TYPE_NAME,
                         config => config
                                 .WithLinkedItems(4)
@@ -54,7 +49,6 @@ namespace DancingGoat.Models
                                 .Where(where => where.WhereEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemID), webPageItemId))
                                 .TopN(1))
                     .InLanguage(languageName);
-        }
 
 
         private async Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<HomePage> homePages, CancellationToken cancellationToken)

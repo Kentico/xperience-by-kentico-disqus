@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Mvc;
-
 using CMS.ContentEngine;
-
-using Kentico.Content.Web.Mvc;
-using Kentico.Content.Web.Mvc.Routing;
 
 using DancingGoat;
 using DancingGoat.Controllers;
 using DancingGoat.Models;
+
+using Kentico.Content.Web.Mvc;
+using Kentico.Content.Web.Mvc.Routing;
+
+using Microsoft.AspNetCore.Mvc;
 
 [assembly: RegisterWebPageRoute(GrinderPage.CONTENT_TYPE_NAME, typeof(DancingGoatGrinderController), WebsiteChannelNames = new[] { DancingGoatConstants.WEBSITE_CHANNEL_NAME }, ActionName = nameof(DancingGoatGrinderController.Detail))]
 
@@ -23,8 +23,8 @@ namespace DancingGoat.Controllers
         private readonly ITaxonomyRetriever taxonomyRetriever;
 
 
-        public DancingGoatGrinderController(ProductPageRepository productPageRepository, 
-            IWebPageDataContextRetriever webPageDataContextRetriever, 
+        public DancingGoatGrinderController(ProductPageRepository productPageRepository,
+            IWebPageDataContextRetriever webPageDataContextRetriever,
             IPreferredLanguageRetriever currentLanguageRetriever,
             ITaxonomyRetriever taxonomyRetriever)
         {

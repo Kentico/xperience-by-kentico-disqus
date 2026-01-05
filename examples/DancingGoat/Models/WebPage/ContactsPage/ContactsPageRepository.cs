@@ -52,15 +52,12 @@ namespace DancingGoat.Models
         }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(Action<WhereParameters> where, string languageName)
-        {
-            return new ContentItemQueryBuilder()
+        private ContentItemQueryBuilder GetQueryBuilder(Action<WhereParameters> where, string languageName) => new ContentItemQueryBuilder()
                     .ForContentType(ContactsPage.CONTENT_TYPE_NAME, config => config
                         .ForWebsite(WebsiteChannelContext.WebsiteChannelName)
                     .Where(where)
                     .TopN(1))
                     .InLanguage(languageName);
-        }
 
 
         private static Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<ContactsPage> contactsPages, CancellationToken cancellationToken)

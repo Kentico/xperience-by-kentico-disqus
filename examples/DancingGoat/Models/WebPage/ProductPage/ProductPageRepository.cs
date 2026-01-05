@@ -27,10 +27,7 @@ namespace DancingGoat.Models
             IContentQueryExecutor executor,
             IProgressiveCache cache,
             IWebPageLinkedItemsDependencyAsyncRetriever webPageLinkedItemsDependencyRetriever)
-            : base(websiteChannelContext, executor, cache)
-        {
-            this.webPageLinkedItemsDependencyRetriever = webPageLinkedItemsDependencyRetriever;
-        }
+            : base(websiteChannelContext, executor, cache) => this.webPageLinkedItemsDependencyRetriever = webPageLinkedItemsDependencyRetriever;
 
 
         /// <summary>
@@ -75,44 +72,32 @@ namespace DancingGoat.Models
         }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(string treePath, string languageName, IEnumerable<IProductFields> linkedProducts)
-        {
-            return GetQueryBuilder(
+        private ContentItemQueryBuilder GetQueryBuilder(string treePath, string languageName, IEnumerable<IProductFields> linkedProducts) => GetQueryBuilder(
                 languageName,
                 config => config
                     .Linking(nameof(IProductPage.RelatedItem), linkedProducts.Select(linkedProduct => ((IContentItemFieldsSource)linkedProduct).SystemFields.ContentItemID))
                     .WithLinkedItems(2)
                     .ForWebsite(WebsiteChannelContext.WebsiteChannelName, PathMatch.Children(treePath)));
-        }
 
 
-        private static ContentItemQueryBuilder GetQueryBuilder(string languageName, Action<ContentTypeQueryParameters> configure = null)
-        {
-            return new ContentItemQueryBuilder()
+        private static ContentItemQueryBuilder GetQueryBuilder(string languageName, Action<ContentTypeQueryParameters> configure = null) => new ContentItemQueryBuilder()
                     .ForContentType(CoffeePage.CONTENT_TYPE_NAME, configure)
                     .ForContentType(GrinderPage.CONTENT_TYPE_NAME, configure)
                     .InLanguage(languageName);
-        }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName, string contentTypeName)
-        {
-            return GetQueryBuilder(
+        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName, string contentTypeName) => GetQueryBuilder(
                 languageName,
                 contentTypeName,
                 config => config
                     .WithLinkedItems(2)
                     .ForWebsite(WebsiteChannelContext.WebsiteChannelName)
                     .Where(where => where.WhereEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemID), id)));
-        }
 
 
-        private static ContentItemQueryBuilder GetQueryBuilder(string languageName, string contentTypeName, Action<ContentTypeQueryParameters> configureQuery = null)
-        {
-            return new ContentItemQueryBuilder()
+        private static ContentItemQueryBuilder GetQueryBuilder(string languageName, string contentTypeName, Action<ContentTypeQueryParameters> configureQuery = null) => new ContentItemQueryBuilder()
                     .ForContentType(contentTypeName, configureQuery)
                     .InLanguage(languageName);
-        }
 
 
         private async Task<ISet<string>> GetDependencyCacheKeys<ProductPageType>(IEnumerable<ProductPageType> products, CancellationToken cancellationToken)
@@ -139,13 +124,13 @@ namespace DancingGoat.Models
                 return Enumerable.Empty<string>();
             }
 
-            return new List<string>()
-            {
+            return
+            [
                 CacheHelper.BuildCacheItemName(new[] { "webpageitem", "byid", product.SystemFields.WebPageItemID.ToString() }, false),
                 CacheHelper.BuildCacheItemName(new[] { "webpageitem", "bychannel", WebsiteChannelContext.WebsiteChannelName, "bypath", product.SystemFields.WebPageItemTreePath }, false),
                 CacheHelper.BuildCacheItemName(new[] { "webpageitem", "bychannel", WebsiteChannelContext.WebsiteChannelName, "childrenofpath", DataHelper.GetParentPath(product.SystemFields.WebPageItemTreePath) }, false),
                 CacheHelper.GetCacheItemName(null, ContentLanguageInfo.OBJECT_TYPE, "all")
-            };
+            ];
         }
     }
 }

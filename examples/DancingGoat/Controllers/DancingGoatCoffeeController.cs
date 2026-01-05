@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Mvc;
-
 using CMS.ContentEngine;
-
-using Kentico.Content.Web.Mvc;
-using Kentico.Content.Web.Mvc.Routing;
 
 using DancingGoat;
 using DancingGoat.Controllers;
 using DancingGoat.Models;
+
+using Kentico.Content.Web.Mvc;
+using Kentico.Content.Web.Mvc.Routing;
+
+using Microsoft.AspNetCore.Mvc;
 
 [assembly: RegisterWebPageRoute(CoffeePage.CONTENT_TYPE_NAME, typeof(DancingGoatCoffeeController), WebsiteChannelNames = new[] { DancingGoatConstants.WEBSITE_CHANNEL_NAME }, ActionName = nameof(DancingGoatCoffeeController.Detail))]
 
@@ -23,8 +23,8 @@ namespace DancingGoat.Controllers
         private readonly ITaxonomyRetriever taxonomyRetriever;
 
 
-        public DancingGoatCoffeeController(ProductPageRepository productPageRepository, 
-            IWebPageDataContextRetriever webPageDataContextRetriever, 
+        public DancingGoatCoffeeController(ProductPageRepository productPageRepository,
+            IWebPageDataContextRetriever webPageDataContextRetriever,
             IPreferredLanguageRetriever currentLanguageRetriever,
             ITaxonomyRetriever taxonomyRetriever)
         {

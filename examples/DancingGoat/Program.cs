@@ -11,13 +11,12 @@ using Kentico.OnlineMarketing.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Web.Mvc;
 
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -51,10 +50,7 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddLocalization()
     .AddControllersWithViews()
     .AddViewLocalization()
-    .AddDataAnnotationsLocalization(options =>
-    {
-        options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResources));
-    });
+    .AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResources)));
 
 builder.Services.AddDancingGoatServices();
 
@@ -142,10 +138,8 @@ static void ConfigureMembershipServices(IServiceCollection services)
     });
 
     services.Configure<AdminIdentityOptions>(options =>
-    {
         // The expiration time span of 8 hours is set for demo purposes only. In production environment, set expiration according to best practices.
-        options.AuthenticationOptions.ExpireTimeSpan = TimeSpan.FromHours(8);
-    });
+        options.AuthenticationOptions.ExpireTimeSpan = TimeSpan.FromHours(8));
 
     services.AddAuthorization();
 }
