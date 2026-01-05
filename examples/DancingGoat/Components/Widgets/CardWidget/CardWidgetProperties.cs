@@ -16,7 +16,7 @@ namespace DancingGoat.Widgets
         /// Image to be displayed.
         /// </summary>
         [ContentItemSelectorComponent(Models.Image.CONTENT_TYPE_NAME, Label = "Image", Order = 1)]
-        public IEnumerable<ContentItemReference> Image { get; set; } = [];
+        public IEnumerable<ContentItemReference> Image { get; set; } = new List<ContentItemReference>();
 
         /// <summary>
         /// Text to be displayed.

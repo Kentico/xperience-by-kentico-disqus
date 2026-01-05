@@ -94,21 +94,27 @@ namespace DancingGoat.Models
         }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName) => new ContentItemQueryBuilder()
+        private ContentItemQueryBuilder GetQueryBuilder(int id, string languageName)
+        {
+            return new ContentItemQueryBuilder()
                 .ForContentType(ArticlesSection.CONTENT_TYPE_NAME,
                 config => config
                         .ForWebsite(WebsiteChannelContext.WebsiteChannelName)
                         .Where(where => where.WhereEquals(nameof(WebPageFields.WebPageItemID), id))
                         .TopN(1))
                 .InLanguage(languageName);
+        }
 
 
-        private ContentItemQueryBuilder GetQueryBuilder(Guid guid, string languageName) => new ContentItemQueryBuilder()
+        private ContentItemQueryBuilder GetQueryBuilder(Guid guid, string languageName)
+        {
+            return new ContentItemQueryBuilder()
                 .ForContentType(ArticlesSection.CONTENT_TYPE_NAME,
                 config => config
                         .ForWebsite(WebsiteChannelContext.WebsiteChannelName)
                         .Where(where => where.WhereEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemGUID), guid))
                         .TopN(1))
                 .InLanguage(languageName);
+        }
     }
 }

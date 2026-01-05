@@ -8,6 +8,6 @@ namespace DancingGoat.Models
     public partial class CoffeePage : IProductPage
     {
         /// <inheritdoc />
-        IEnumerable<IProductFields> IProductPage.RelatedItem => RelatedItem;
+        IEnumerable<IProductFields> IProductPage.RelatedItem { get => RelatedItem; }
     }
 }

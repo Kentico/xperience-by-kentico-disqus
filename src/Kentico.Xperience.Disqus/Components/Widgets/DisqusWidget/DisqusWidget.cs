@@ -1,17 +1,17 @@
 ﻿using System;
 
-using CMS.Core;
-using CMS.DataEngine;
-using CMS.Helpers;
-
-using Kentico.PageBuilder.Web.Mvc;
-using Kentico.Web.Mvc;
-using Kentico.Xperience.Disqus.Widgets;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+
+using CMS.Core;
+using CMS.DataEngine;
+using CMS.Helpers;
+
+using Kentico.Web.Mvc;
+using Kentico.PageBuilder.Web.Mvc;
+using Kentico.Xperience.Disqus.Widgets;
 
 [assembly: CMS.AssemblyDiscoverable]
 [assembly: RegisterWidget(DisqusWidget.IDENTIFIER,

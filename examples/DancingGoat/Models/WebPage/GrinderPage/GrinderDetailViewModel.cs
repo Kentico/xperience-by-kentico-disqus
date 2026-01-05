@@ -11,7 +11,7 @@ namespace DancingGoat.Models
         /// <summary>
         /// Maps <see cref="GrinderPage"/> to a <see cref="GrinderDetailViewModel"/>.
         /// </summary>
-        public static async Task<GrinderDetailViewModel> GetViewModel(GrinderPage grinderPage, string languageName, ITaxonomyRetriever taxonomyRetriever)
+        public async static Task<GrinderDetailViewModel> GetViewModel(GrinderPage grinderPage, string languageName, ITaxonomyRetriever taxonomyRetriever)
         {
             var grinder = grinderPage.RelatedItem.FirstOrDefault();
             var image = grinder.ProductFieldsImage.FirstOrDefault();

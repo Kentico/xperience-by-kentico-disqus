@@ -33,12 +33,15 @@ namespace DancingGoat.Models
         }
 
 
-        private static ContentItemQueryBuilder GetQueryBuilder(Guid imageGuid, string languageName) => new ContentItemQueryBuilder()
+        private static ContentItemQueryBuilder GetQueryBuilder(Guid imageGuid, string languageName)
+        {
+            return new ContentItemQueryBuilder()
                     .ForContentType(Image.CONTENT_TYPE_NAME,
                         config => config
                                 .TopN(1)
                                 .Where(where => where.WhereEquals(nameof(IContentQueryDataContainer.ContentItemGUID), imageGuid)))
                     .InLanguage(languageName);
+        }
 
 
         private static Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<Image> images, CancellationToken cancellationToken)

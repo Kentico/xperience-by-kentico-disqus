@@ -19,7 +19,10 @@ namespace DancingGoat.Models
 
 
         public SocialLinkRepository(IWebsiteChannelContext websiteChannelContext, IContentQueryExecutor executor, IProgressiveCache cache, ILinkedItemsDependencyRetriever linkedItemsDependencyRetriever)
-            : base(websiteChannelContext, executor, cache) => this.linkedItemsDependencyRetriever = linkedItemsDependencyRetriever;
+            : base(websiteChannelContext, executor, cache)
+        {
+            this.linkedItemsDependencyRetriever = linkedItemsDependencyRetriever;
+        }
 
 
         /// <summary>
@@ -35,9 +38,12 @@ namespace DancingGoat.Models
         }
 
 
-        private static ContentItemQueryBuilder GetQueryBuilder(string languageName) => new ContentItemQueryBuilder()
+        private static ContentItemQueryBuilder GetQueryBuilder(string languageName)
+        {
+            return new ContentItemQueryBuilder()
                     .ForContentType(SocialLink.CONTENT_TYPE_NAME, config => config.WithLinkedItems(1))
                     .InLanguage(languageName);
+        }
 
 
         private Task<ISet<string>> GetDependencyCacheKeys(IEnumerable<SocialLink> socialLinks, CancellationToken cancellationToken)

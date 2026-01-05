@@ -10,7 +10,10 @@ namespace DancingGoat.Models
     {
         private const int ROOT_TAG_ID = 0;
 
-        public static TagViewModel GetViewModel(Tag tag, int level = 0) => new(tag.Title, level, tag.Identifier);
+        public static TagViewModel GetViewModel(Tag tag, int level = 0)
+        {
+            return new TagViewModel(tag.Title, level, tag.Identifier);
+        }
 
 
         public static List<TagViewModel> GetViewModels(IEnumerable<Tag> tags)

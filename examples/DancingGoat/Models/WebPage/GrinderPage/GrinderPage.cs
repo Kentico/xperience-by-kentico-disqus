@@ -8,6 +8,6 @@ namespace DancingGoat.Models
     public partial class GrinderPage : IProductPage
     {
         /// <inheritdoc />
-        IEnumerable<IProductFields> IProductPage.RelatedItem => RelatedItem;
+        IEnumerable<IProductFields> IProductPage.RelatedItem { get => RelatedItem; }
     }
 }
